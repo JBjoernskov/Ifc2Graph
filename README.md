@@ -29,7 +29,7 @@ The values of this dictionary are lists containing the Name attributes of the ad
 The Graph class visualizes the obtained adjacency graph using [NetworkX](https://networkx.org/) to construct the graph and [Graphviz](https://graphviz.org/) to visualize the the graph.
 
 #### Input:
-As input a the IfcGeometry output must be provided
+As input, the previously obtained dictionary must be provided. 
 
 #### Ouput:
 The output is an image saved in a desired directory. Below, examples of generated graph images is seen for an actual building. 
