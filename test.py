@@ -1,6 +1,5 @@
 from pathlib import Path
 import ifcopenshell
-import ifcopenshell.geom
 import os
 import Ifc2Graph.IfcGeometry as IfcGeometry
 import Ifc2Graph.Graph as Graph
