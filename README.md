@@ -26,5 +26,4 @@ The values of this dictionary are lists containing the Name attributes of the ad
 print "hello world"
 ```
 
-
-![Picture1](https://user-images.githubusercontent.com/74002963/174340772-1586c62b-f7e6-4207-bc41-d9b27efc5131.png)
+![adjacent_rooms_graph_OU44](https://user-images.githubusercontent.com/74002963/174341376-44a9bcea-aec3-4a21-b186-1f16fc31a294.png)
