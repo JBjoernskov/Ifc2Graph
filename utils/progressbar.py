@@ -2,7 +2,6 @@ import sys
 import math
 
 def progressbar(current,start,stop):
-
     total_time = stop-start
     relative_time = current-start
 

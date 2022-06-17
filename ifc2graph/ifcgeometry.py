@@ -1,9 +1,8 @@
 #misc non-standard libraries
 import ifcopenshell
 import ifcopenshell.geom
-import numpy as np
-import matplotlib.pyplot as plt
-import itertools
+import trimesh
+from mayavi import mlab
 
 #custom
 import utils.progressbar as progressbar
@@ -12,12 +11,11 @@ import utils.progressbar as progressbar
 import math
 import os
 import pickle
+import numpy as np
+import matplotlib.pyplot as plt
+import itertools
 
-#geometry
-import trimesh
 
-# plotting
-from mayavi import mlab
 
 
 
