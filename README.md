@@ -15,8 +15,7 @@ Ifc2Graph currently has two functionalities, divided into the classes IfcGeometr
 
 
 ### IfcGeometry
-The IfcGeometry class extracts the geometry for each IfcSpace entity in the provided IFC-file using [IfcOpenShell](http://ifcopenshell.org/python), which is used to define [Trimesh](https://trimsh.org/trimesh.html) objects. 
-These Trimesh objects are then used to derive which space that are adjacent. 
+The IfcGeometry class extracts the geometry for each IfcSpace entity in the provided IFC-file using [IfcOpenShell](http://ifcopenshell.org/python), which is used to define [Trimesh](https://trimsh.org/trimesh.html) objects. These Trimesh objects are then used to derive which spaces that are adjacent. 
 
 #### Input:
 As input a valid IFC-file must be provided. An example file is found in the "test_ifc_files" folder.
@@ -30,10 +29,10 @@ The values of this dictionary are lists containing the Name attributes of the ad
 The Graph class visualizes the obtained adjacency graph using [NetworkX](https://networkx.org/) to construct the graph and [Graphviz](https://graphviz.org/) to visualize the the graph.
 
 #### Input:
-As input a dictionary must be provided 
+As input a the IfcGeometry output must be provided
 
 #### Ouput:
-The output is an image saved in a desired directory. 
+The output is an image saved in a desired directory. Below, examples of generated graph images is seen for an actual building. 
 
 <img src="https://user-images.githubusercontent.com/74002963/174341376-44a9bcea-aec3-4a21-b186-1f16fc31a294.png" width="1000">
 <img src="https://user-images.githubusercontent.com/74002963/174342723-81112bf1-4928-452a-b142-6d8372bd83e8.png" width="1000">
