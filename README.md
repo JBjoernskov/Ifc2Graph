@@ -28,4 +28,4 @@ print "hello world"
 
 ![adjacent_rooms_graph_OU44](https://user-images.githubusercontent.com/74002963/174341376-44a9bcea-aec3-4a21-b186-1f16fc31a294.png)
 
-![adjacent_rooms_graph_OU44](https://user-images.githubusercontent.com/74002963/174341700-0217afcb-8959-4238-841d-aa83c4eb757d.png)
+![adjacent_rooms_graph_OU44](https://user-images.githubusercontent.com/74002963/174342010-c72cfdaa-7698-46bd-b9c6-65f9d5610230.png)
