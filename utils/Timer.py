@@ -1,4 +1,5 @@
 import math
+import time
 class Timer:
     def __init__(self,checkpoint_name):
         self.start_time = time.time()

@@ -22,3 +22,6 @@ def progressbar(current,start,stop):
 
     sys.stdout.write('\r\x1b[K' + progress_str)
     sys.stdout.flush()
+    
+    if current==stop:
+        print("")
