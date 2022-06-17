@@ -196,21 +196,6 @@ class IfcGeometry:
     def get_point_space_idx(self,x_idx,y_idx,z_idx):
         return self._3D_space_idx_list[x_idx,y_idx,z_idx]
 
-    def get_NN_3D_input(self,value_space_list,value_neutral,value_ground,value_ambient_air):
-        NN_3D_temp_input = np.zeros(self.grid_shape,dtype=np.float)
-        neutral_mask = self._3D_space_idx_list==self.neutral_idx
-        outside_mask = self._3D_space_idx_list==self.ambient_idx
-        below_zero_mask = np.zeros(self.grid_shape,dtype=np.bool)
-        below_zero_mask[:,:,self.voxel_z_location_vec<0] = True
-        ground_mask = np.logical_and(outside_mask,below_zero_mask)
-        NN_3D_temp_input[neutral_mask] = value_neutral
-        NN_3D_temp_input[outside_mask] = value_ambient_air
-        NN_3D_temp_input[ground_mask] = value_ground
-        for space_counter,value in enumerate(value_space_list):
-            NN_3D_temp_input[self._3D_space_idx_list==space_counter] = value
-
-        return NN_3D_temp_input
-
     def get_adjacent_spaces(self):
         x_bool = np.equal(self._3D_space_idx_list[:-1,:,:], self._3D_space_idx_list[1:,:,:]) == False
         y_bool = (self._3D_space_idx_list[:,:-1,:] == self._3D_space_idx_list[:,1:,:]) == False
