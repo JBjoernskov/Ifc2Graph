@@ -1,15 +1,15 @@
 
 
-import ifcopenshell
-import ifcopenshell.geom
-
-
 import numpy as np
-import extract_geometry_from_ifc
+import Ifc2Graph.SpaceGeometryContainer as SpaceGeometryContainer
 
-import pprint
+# import pprint
 import networkx as nx
 import os
+
+
+
+
 
 def get_story(name):
     _1st_color_identifier_list = ["-00","ØØØØØ","-01","-02"]
@@ -162,13 +162,8 @@ def generate_adjacent_rooms_graph(adjecent_space_dict, space_type_name_dict, pro
 
 
 def extract_adjacent_rooms_from_ifc(ifc_file, project_name):
-    force = False
-    conv_block_size = 0.5
     space_map_name = project_name
-
-    no_sensor_room_list = []
-    exclude_space_list = []
-    space_map = extract_geometry_from_ifc.get_space_map(ifc_file,space_map_name,force,exclude_space_list,no_sensor_room_list,conv_block_size)
+    space_map = SpaceGeometryContainer.SpaceGeometryContainer(ifc_file, space_map_name, force_init=True)
     adjacent_space_dict = space_map.get_adjacent_spaces()
     space_type_name_dict = space_map.space_type_name_dict
 
@@ -181,12 +176,5 @@ def extract_adjacent_rooms_from_ifc(ifc_file, project_name):
     return adjacent_space_dict
 
     
-
-
-# project_name = "OU44"
-# folder_path = "C:/Users/jabj/OneDrive - Syddansk Universitet/PhD_Project_Jakob/Twin4build/ifc/OU44_Architecture/"
-# ifc_file_name = "SDU-OD_F1_H0_BY_44_EX"
-# ifc_file_path = folder_path + ifc_file_name + ".ifc"
-# ifc_file = ifcopenshell.open(ifc_file_path)
 
 # adjecent_space_dict = extract_adjacent_rooms_from_ifc(ifc_file, project_name)
