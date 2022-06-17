@@ -21,4 +21,4 @@ C:\path\to\repository\build> cmake --build . --config Release
 The input is a valid IFC-file. An example is provided in the "test_ifc_files" folder.
 
 ## Ouput:
-The output
+The output is a dictionary with keys corresponding to the \texttt{IfcSpace} entities contained in the IFC-file given as input. 
