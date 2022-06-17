@@ -192,7 +192,6 @@ class IfcGeometry:
 
             progressbar.progressbar(space_counter,0,len(self.space_mesh_list)-1)
             
-
     def get_point_space_idx(self,x_idx,y_idx,z_idx):
         return self._3D_space_idx_list[x_idx,y_idx,z_idx]
 
