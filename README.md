@@ -1,7 +1,7 @@
 # Ifc2Graph
 
 The Ifc2Graph module can be used as a tool to extract space topology from IFC-files. 
-Ifc2Graph currently has two functionalities, divided into the classes IfcGeometry and Graph.
+Ifc2Graph currently has two functionalities, divided into the classes IfcGeometry and IfcGraph.
 
 ## Dependencies
 
@@ -33,8 +33,8 @@ The output is a dictionary with keys corresponding to the Name attribute of the 
 The values of this dictionary are lists containing the Name attributes of the adjacent IfcSpace entities.
 
 
-### Graph
-The Graph class visualizes the obtained adjacency graph using [NetworkX](https://networkx.org) to construct the graph and [Graphviz](https://graphviz.org) to visualize the the graph.
+### IfcGraph
+The IfcGraph class visualizes the obtained adjacency graph using [NetworkX](https://networkx.org) to construct the graph and [Graphviz](https://graphviz.org) to visualize the the graph.
 
 #### Input:
 As input, the previously obtained dictionary must be provided. 
