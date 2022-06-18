@@ -92,7 +92,8 @@ class Graph():
         if save_dir is None:
             file_name = "adjacent_rooms_graph_" + self.name
         else:
-            file_name = save_dir + "/adjacent_rooms_graph_" + self.name
+            file_name = os.path.join(save_dir, "adjacent_rooms_graph_" + self.name)
+            
         nx.drawing.nx_pydot.write_dot(adjacent_rooms_graph, file_name+".dot")
         cmd_string = "\"C:/Program Files/Graphviz/bin/dot.exe\" -Tpng -Ksfdp -Grankdir=LR -Goverlap=scale -Gsplines=true -Gmargin=0 -Gratio=fill -Gsize=7,5! -Gpack=true -Gdpi=1000 -Grepulsiveforce=10 -o " + file_name+".png " + file_name+".dot"
         os.system(cmd_string)

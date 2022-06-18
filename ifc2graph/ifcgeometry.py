@@ -21,14 +21,14 @@ import itertools
 
 class IfcGeometry:
     def __init__(self, 
-                ifc_file=None, #An open ifc-file
+                ifc_file_path=None, #An open ifc-file
                 name = None, #Name of the SpaceGeometryContainer
                 force_init=False, #Force the creation of a new SpaceGeometryContainer object
                 exclude_space_list=[], #List with names of rooms that should not be included 
                 voxel_distance=0.5, #Distance between coordiantes along each axis X, Y, Z
                 tol=1e-4): #Tolerance used in the geometrical analysis. This should likely just be left at the default value
 
-        self.ifc_file = ifc_file
+        self.ifc_file_path = ifc_file_path
         self.name = name
         self.force_init = force_init
         self.exclude_space_list = exclude_space_list
@@ -58,7 +58,8 @@ class IfcGeometry:
 
             print("Extracting geometry from ifc...")
             neutral_space_name = "Area" #spaces that doesnt classify as a room but is a part of the building
-            ifc_space_list = self.ifc_file.by_type("IfcSpace")
+            ifc_file = ifcopenshell.open(self.ifc_file_path)
+            ifc_space_list = ifc_file.by_type("IfcSpace")
             if len(ifc_space_list)==0:
                 print("Ifc-file does not contain any space objects -> quitting...")
             else:
