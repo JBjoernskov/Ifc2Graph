@@ -1,4 +1,3 @@
-import numpy as np
 import networkx as nx
 import os
 
@@ -15,14 +14,19 @@ class Graph():
         self.name_to_type_dict = name_to_type_dict
         self.name = name
 
+    # Currently there is no general method to find the story level.
+    # This is based on the Name property of the IfcSpace entities and is only valid for the example office building.
     def get_story(self, space):
-        return 0 #Currently there is no general implemented method to find the story level
+        name = str(space)
+        story_idx = int(space[0])
+        return story_idx 
 
     def generate_graph(self, save_dir=None):
         adjacent_rooms_graph = nx.Graph() ###
         adjacent_rooms_graph_node_attribute_dict = {}
 
-        color_list = ["#808B96", "#e99d4e", "#a6cee3", "#b2df8a", "#91998e"] #Last is default
+        # This is a color list for the building stories
+        color_list = ["#808B96", "#e99d4e", "#a6cee3", "#b2df8a", "#fddbd0", "#91998e"] #Last is default
 
         for space,adjacent_space_list in self.adjacent_space_dict.items():
             space = space.replace("Ø","OE")
@@ -93,7 +97,7 @@ class Graph():
             file_name = "adjacent_rooms_graph_" + self.name
         else:
             file_name = os.path.join(save_dir, "adjacent_rooms_graph_" + self.name)
-            
+
         nx.drawing.nx_pydot.write_dot(adjacent_rooms_graph, file_name+".dot")
-        cmd_string = "\"C:/Program Files/Graphviz/bin/dot.exe\" -Tpng -Ksfdp -Grankdir=LR -Goverlap=scale -Gsplines=true -Gmargin=0 -Gratio=fill -Gsize=7,5! -Gpack=true -Gdpi=1000 -Grepulsiveforce=10 -o " + file_name+".png " + file_name+".dot"
+        cmd_string = "\"C:/Program Files/Graphviz/bin/dot.exe\" -Tpng -Ksfdp -Grankdir=LR -Goverlap=scale -Gsplines=true -Gmargin=0 -Gratio=fill -Gsize=7,5! -Gpack=true -Gdpi=1000 -Grepulsiveforce=1 -o " + file_name+".png " + file_name+".dot"
         os.system(cmd_string)
