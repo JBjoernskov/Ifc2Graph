@@ -26,7 +26,7 @@ As input a path to a valid IFC-file must be provided. Example files is found in 
 </p>
 
 [Source](https://www.ifcwiki.org/index.php?title=KIT_IFC_Examples): 
-*Institute for Automation and Applied Informatics (IAI) / Karlsruhe Institute of Technology (KIT) or Institut für Automation und angewandte Information / Karlsruher Institut für Technologie*
+*Institute for Automation and Applied Informatics (IAI) / Karlsruhe Institute of Technology (KIT)*
 
 #### Ouput:
 The output is a dictionary with keys corresponding to the Name attribute of the IfcSpace entities contained in the IFC input file.
