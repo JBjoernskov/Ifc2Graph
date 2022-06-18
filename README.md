@@ -40,7 +40,8 @@ The Graph class visualizes the obtained adjacency graph using [NetworkX](https:/
 As input, the previously obtained dictionary must be provided. 
 
 #### Ouput:
-The output is an image saved in a desired directory. Below, examples of generated graph images is seen for an actual building. 
+The output is an image of the generated graph.
+Below, examples of generated graph images is seen for an actual building. 
 
 <p float="left">
     <img src="https://user-images.githubusercontent.com/74002963/174341376-44a9bcea-aec3-4a21-b186-1f16fc31a294.png" width="400">
