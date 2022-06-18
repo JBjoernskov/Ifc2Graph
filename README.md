@@ -3,12 +3,12 @@
 The Ifc2Graph module can be used as a tool to extract space topology from IFC-files. 
 Ifc2Graph currently has two functionalities, divided into the classes IfcGeometry and Graph.
 
-## Installation:
-- XXX
+## Dependencies
 
-
-### Dependencies
-- XXX
+- [IfcOpenShell](http://ifcopenshell.org/python)
+- [Trimesh](https://trimsh.org/trimesh.html) 
+- [NetworkX](https://networkx.org/)
+- [Graphviz](https://graphviz.org/)
 
 
 ## Usage 
