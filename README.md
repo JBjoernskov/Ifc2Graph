@@ -24,8 +24,9 @@ As input a path to a valid IFC-file must be provided. Example files is found in 
     <img src="https://user-images.githubusercontent.com/74002963/174432556-3e2abdf3-794f-4a54-a24c-0efa45717420.png" width="400">
     <img src="https://user-images.githubusercontent.com/74002963/174432617-f8bc0f66-387d-45f2-9285-7edd3a0620fc.png" width="400">
 </p>
-
-
+[Source](https://www.ifcwiki.org/index.php?title=KIT_IFC_Examples): 
+*Institute for Automation and Applied Informatics (IAI) / Karlsruhe Institute of Technology (KIT) or Institut für Automation und angewandte Information / Karlsruher Institut für Technologie*
+https://www.ifcwiki.org/index.php?title=KIT_IFC_Examples
 
 #### Ouput:
 The output is a dictionary with keys corresponding to the Name attribute of the IfcSpace entities contained in the IFC input file.
