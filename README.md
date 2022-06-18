@@ -21,7 +21,7 @@ The IfcGeometry class extracts the geometry for each IfcSpace entity in the prov
 As input a path to a valid IFC-file must be provided. Example files is found in the "test_ifc_files" folder.
 
 <p float="left">
-    <img src="https://user-images.githubusercontent.com/74002963/174432556-3e2abdf3-794f-4a54-a24c-0efa45717420.png" width="40">
+    <img src="https://user-images.githubusercontent.com/74002963/174432556-3e2abdf3-794f-4a54-a24c-0efa45717420.png" width="400">
     <img src="https://user-images.githubusercontent.com/74002963/174432617-f8bc0f66-387d-45f2-9285-7edd3a0620fc.png" width="400">
 </p>
 
