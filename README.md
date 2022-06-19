@@ -15,7 +15,7 @@ Ifc2Graph currently has two functionalities, divided into the classes IfcGeometr
 
 
 ### IfcGeometry
-The IfcGeometry class extracts the geometry for each IfcSpace entity in the provided IFC-file using [IfcOpenShell](http://ifcopenshell.org/python), which is used to define [Trimesh](https://trimsh.org) objects. These Trimesh objects are then used to determine which spaces that are adjacent. 
+The IfcGeometry class extracts the geometry for each IfcSpace entity in the provided IFC-file using [IfcOpenShell](http://ifcopenshell.org/python). This geometry is used to instantiate [Trimesh](https://trimsh.org) objects, which are then used to determine the adjacency of rooms. 
 
 #### Input:
 As input a path to a valid IFC-file must be provided. Example files is found in the "test_ifc_files" folder.
