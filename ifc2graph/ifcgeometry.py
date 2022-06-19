@@ -2,7 +2,6 @@
 import ifcopenshell
 import ifcopenshell.geom
 import trimesh
-from mayavi import mlab
 
 #custom
 import utils.progressbar as progressbar
@@ -10,9 +9,7 @@ import utils.progressbar as progressbar
 #standard
 import math
 import os
-import pickle
 import numpy as np
-import matplotlib.pyplot as plt
 import itertools
 
 
@@ -45,6 +42,9 @@ class IfcGeometry:
         self.neutral_idx = -50
         self.ambient_idx = -100
 
+        # This is a color list for the building stories
+        self.color_list = ["#808B96", "#e99d4e", "#a6cee3", "#b2df8a", "#fddbd0", "#91998e"] #Last is default
+
         self.init_geometry()
         self.init_3D_space_idx_array()
 
@@ -60,40 +60,50 @@ class IfcGeometry:
             neutral_space_name = "Area" #spaces that doesnt classify as a room but is a part of the building
             ifc_file = ifcopenshell.open(self.ifc_file_path)
             ifc_space_list = ifc_file.by_type("IfcSpace")
+            ifc_storey_list = ifc_file.by_type("IfcBuildingStorey")
+
             if len(ifc_space_list)==0:
                 print("Ifc-file does not contain any space objects -> quitting...")
             else:
                 self.space_name_list = []
                 self.space_mesh_list = []
                 self.space_type_name_dict = {}
+                self.space_storey_dict = {}
+
                 self.space_name_neutral_list = []
                 self.space_mesh_neutral_list = []
-                for i,space in enumerate(ifc_space_list):
-                    shape = ifcopenshell.geom.create_shape(settings, space)
-                    vertices = shape.geometry.verts
-                    edges = shape.geometry.edges
-                    faces = shape.geometry.faces
 
-                    if space.Name is None: #If the space has no name, give it a generic name 
-                        space.Name = "Space_" + str(next(id_iter))
+                space_counter = 0
+                for storey_counter,storey in enumerate(ifc_storey_list):
+                    for ifc_rel_aggregates in storey.IsDecomposedBy:
+                        for space in ifc_rel_aggregates.RelatedObjects:
+                            shape = ifcopenshell.geom.create_shape(settings, space)
+                            vertices = shape.geometry.verts
+                            edges = shape.geometry.edges
+                            faces = shape.geometry.faces
 
-                    grouped_vertices = np.array([[vertices[i], vertices[i + 1], vertices[i + 2]] for i in range(0, len(vertices), 3)])
-                    grouped_edges = np.array([[edges[i], edges[i + 1]] for i in range(0, len(edges), 2)])
-                    grouped_faces = np.array([[faces[i], faces[i + 1], faces[i + 2]] for i in range(0, len(faces), 3)])
+                            if space.Name is None: #If the space has no name, give it a generic name 
+                                space.Name = "Space_" + str(next(id_iter))
 
-                    mesh = trimesh.Trimesh(vertices=grouped_vertices,
-                                faces=grouped_faces)
-                    
-                    if (space.Name in self.exclude_space_list)==False:
-                        if space.LongName == neutral_space_name:
-                            self.space_name_neutral_list.append(space.Name)
-                            self.space_mesh_neutral_list.append(mesh)
-                        else:
-                            self.space_name_list.append(space.Name)
-                            self.space_mesh_list.append(mesh)
-                            self.space_type_name_dict[space.Name] = space.LongName
+                            grouped_vertices = np.array([[vertices[i], vertices[i + 1], vertices[i + 2]] for i in range(0, len(vertices), 3)])
+                            grouped_edges = np.array([[edges[i], edges[i + 1]] for i in range(0, len(edges), 2)])
+                            grouped_faces = np.array([[faces[i], faces[i + 1], faces[i + 2]] for i in range(0, len(faces), 3)])
 
-                    progressbar.progressbar(i,0,len(ifc_space_list)-1)
+                            mesh = trimesh.Trimesh(vertices=grouped_vertices,
+                                        faces=grouped_faces)
+                            
+                            if (space.Name in self.exclude_space_list)==False:
+                                if space.LongName == neutral_space_name:
+                                    self.space_name_neutral_list.append(space.Name)
+                                    self.space_mesh_neutral_list.append(mesh)
+                                else:
+                                    self.space_name_list.append(space.Name)
+                                    self.space_mesh_list.append(mesh)
+                                    self.space_type_name_dict[space.Name] = space.LongName
+                                    self.space_storey_dict[space.Name] = storey_counter
+                            
+                            progressbar.progressbar(space_counter,0,len(ifc_space_list)-1)
+                            space_counter += 1
 
                 #Check for duplicate room names
                 if len(set(self.space_name_list)) != len(self.space_name_list):
@@ -196,7 +206,7 @@ class IfcGeometry:
     def get_point_space_idx(self,x_idx,y_idx,z_idx):
         return self._3D_space_idx_array[x_idx,y_idx,z_idx]
 
-    def get_adjacent_spaces(self):
+    def get_adjacent_spaces_dict(self):
         x_bool = np.equal(self._3D_space_idx_array[:-1,:,:], self._3D_space_idx_array[1:,:,:]) == False
         y_bool = (self._3D_space_idx_array[:,:-1,:] == self._3D_space_idx_array[:,1:,:]) == False
         z_bool = (self._3D_space_idx_array[:,:,:-1] == self._3D_space_idx_array[:,:,1:]) == False
@@ -303,7 +313,7 @@ class IfcGeometry:
             else:
                 pair_vec = pair_vec[:,is_equal_bool==False]
 
-        adjacent_space_dict = {}
+        adjacent_spaces_dict = {}
         pair_vec_no_duplicates = np.array(pair_list_no_duplicates).transpose()
         for space_counter,space_name in enumerate(self.space_name_list):
             bool_1 = space_counter == pair_vec_no_duplicates[0,:]
@@ -321,11 +331,20 @@ class IfcGeometry:
                     adjacent_space_list.append(self.space_name_list[el])
                 elif el == -100:
                     adjacent_space_list.append("Outside")
-            adjacent_space_dict[space_name] = adjacent_space_list
+            adjacent_spaces_dict[space_name] = adjacent_space_list
 
         ####### IF duplicate space names occur in the IFC and these spaces are adjacent then the resulting adjacent_space_dict will have elements that reference themselves #########
 
-        return adjacent_space_dict
+        return adjacent_spaces_dict
 
+    def visualize(self):
+        scene = trimesh.Scene()
+        point_cloud = []
+        for space_name,mesh in zip(self.space_name_list,self.space_mesh_list):
+            mesh.visual.face_colors = trimesh.visual.color.hex_to_rgba(self.color_list[self.space_storey_dict[space_name]])
+            point_cloud.extend(list(mesh.vertices))
+            scene.add_geometry(mesh)
 
-
+        angles = np.array([0.4*np.pi,0,-0.25*np.pi])
+        scene.set_camera(angles=angles)
+        scene.show()
