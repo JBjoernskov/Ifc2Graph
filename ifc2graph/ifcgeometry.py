@@ -46,7 +46,7 @@ class IfcGeometry:
         self.ambient_idx = -100
 
         self.init_geometry()
-        self.init_3D_space_idx_list()
+        self.init_3D_space_idx_array()
 
     def init_geometry(self):
         current_dir = os.path.dirname(os.path.realpath(__file__))
@@ -100,7 +100,7 @@ class IfcGeometry:
                     print("Warning: duplicate space names found in IFC.")
 
 
-    def init_3D_space_idx_list(self):
+    def init_3D_space_idx_array(self):
         min_x_list = []
         min_y_list = []
         min_z_list = []
@@ -170,7 +170,7 @@ class IfcGeometry:
 
         print("Generating space to position index map...")
         self.grid_shape = (self.x_size,self.y_size,self.z_size)
-        self._3D_space_idx_list = np.ones(self.grid_shape,dtype=np.int)*self.ambient_idx
+        self._3D_space_idx_array = np.ones(self.grid_shape,dtype=np.int)*self.ambient_idx
 
         #Set indices for neutral space
         for space_counter,space_mesh in enumerate(self.space_mesh_neutral_list):
@@ -178,7 +178,7 @@ class IfcGeometry:
             x_idx = idx_mesh_vec[bool_vec,0]
             y_idx = idx_mesh_vec[bool_vec,1]
             z_idx = idx_mesh_vec[bool_vec,2]
-            self._3D_space_idx_list[x_idx,y_idx,z_idx] = self.neutral_idx
+            self._3D_space_idx_array[x_idx,y_idx,z_idx] = self.neutral_idx
 
             progressbar.progressbar(space_counter,0,len(self.space_mesh_neutral_list)-1)
 
@@ -188,18 +188,18 @@ class IfcGeometry:
             x_idx = idx_mesh_vec[bool_vec,0]
             y_idx = idx_mesh_vec[bool_vec,1]
             z_idx = idx_mesh_vec[bool_vec,2]
-            self._3D_space_idx_list[x_idx,y_idx,z_idx] = space_counter
+            self._3D_space_idx_array[x_idx,y_idx,z_idx] = space_counter
             self.space_idx_dict[self.space_name_list[space_counter]] = space_counter
 
             progressbar.progressbar(space_counter,0,len(self.space_mesh_list)-1)
             
     def get_point_space_idx(self,x_idx,y_idx,z_idx):
-        return self._3D_space_idx_list[x_idx,y_idx,z_idx]
+        return self._3D_space_idx_array[x_idx,y_idx,z_idx]
 
     def get_adjacent_spaces(self):
-        x_bool = np.equal(self._3D_space_idx_list[:-1,:,:], self._3D_space_idx_list[1:,:,:]) == False
-        y_bool = (self._3D_space_idx_list[:,:-1,:] == self._3D_space_idx_list[:,1:,:]) == False
-        z_bool = (self._3D_space_idx_list[:,:,:-1] == self._3D_space_idx_list[:,:,1:]) == False
+        x_bool = np.equal(self._3D_space_idx_array[:-1,:,:], self._3D_space_idx_array[1:,:,:]) == False
+        y_bool = (self._3D_space_idx_array[:,:-1,:] == self._3D_space_idx_array[:,1:,:]) == False
+        z_bool = (self._3D_space_idx_array[:,:,:-1] == self._3D_space_idx_array[:,:,1:]) == False
 
         dx_idx_space_1_x, dx_idx_space_1_y, dx_idx_space_1_z = np.where(x_bool)
         dy_idx_space_1_x, dy_idx_space_1_y, dy_idx_space_1_z = np.where(y_bool)
@@ -217,12 +217,12 @@ class IfcGeometry:
         dy_idx_space_2_z = dy_idx_space_1_z
         dz_idx_space_2_z = dz_idx_space_1_z+1
 
-        dx_idx_pair_1 = self._3D_space_idx_list[dx_idx_space_1_x, dx_idx_space_1_y, dx_idx_space_1_z]
-        dx_idx_pair_2 = self._3D_space_idx_list[dx_idx_space_2_x, dx_idx_space_2_y, dx_idx_space_2_z]
-        dy_idx_pair_1 = self._3D_space_idx_list[dy_idx_space_1_x, dy_idx_space_1_y, dy_idx_space_1_z]
-        dy_idx_pair_2 = self._3D_space_idx_list[dy_idx_space_2_x, dy_idx_space_2_y, dy_idx_space_2_z]
-        dz_idx_pair_1 = self._3D_space_idx_list[dz_idx_space_1_x, dz_idx_space_1_y, dz_idx_space_1_z]
-        dz_idx_pair_2 = self._3D_space_idx_list[dz_idx_space_2_x, dz_idx_space_2_y, dz_idx_space_2_z]
+        dx_idx_pair_1 = self._3D_space_idx_array[dx_idx_space_1_x, dx_idx_space_1_y, dx_idx_space_1_z]
+        dx_idx_pair_2 = self._3D_space_idx_array[dx_idx_space_2_x, dx_idx_space_2_y, dx_idx_space_2_z]
+        dy_idx_pair_1 = self._3D_space_idx_array[dy_idx_space_1_x, dy_idx_space_1_y, dy_idx_space_1_z]
+        dy_idx_pair_2 = self._3D_space_idx_array[dy_idx_space_2_x, dy_idx_space_2_y, dy_idx_space_2_z]
+        dz_idx_pair_1 = self._3D_space_idx_array[dz_idx_space_1_x, dz_idx_space_1_y, dz_idx_space_1_z]
+        dz_idx_pair_2 = self._3D_space_idx_array[dz_idx_space_2_x, dz_idx_space_2_y, dz_idx_space_2_z]
         
         # For each point in the generated mesh, it is checked which space the adjacent point is encapsulated by. 
         # If the adjacent point does not belong to a space, the subsequent point is checked. 
@@ -231,19 +231,19 @@ class IfcGeometry:
         for i in range(n_search_blocks):
             dx_temp = dx_idx_space_2_x+i+1
             dx_temp[dx_temp>=self.grid_shape[0]] = dx_idx_space_2_x[dx_temp>=self.grid_shape[0]]
-            temp = self._3D_space_idx_list[dx_temp, dx_idx_space_2_y, dx_idx_space_2_z] ###     If +1 point is not a room then check +2 point
+            temp = self._3D_space_idx_array[dx_temp, dx_idx_space_2_y, dx_idx_space_2_z] ###     If +1 point is not a room then check +2 point
             bool_dx = np.logical_or(dx_idx_pair_2 == self.neutral_idx, dx_idx_pair_2 == self.ambient_idx) ###
             dx_idx_pair_2[bool_dx] = temp[bool_dx] ###
 
             dy_temp = dy_idx_space_2_y+i+1
             dy_temp[dy_temp>=self.grid_shape[1]] = dy_idx_space_2_y[dy_temp>=self.grid_shape[1]]
-            temp = self._3D_space_idx_list[dy_idx_space_2_x, dy_temp, dy_idx_space_2_z] ###
+            temp = self._3D_space_idx_array[dy_idx_space_2_x, dy_temp, dy_idx_space_2_z] ###
             bool_dy = np.logical_or(dy_idx_pair_2 == self.neutral_idx, dy_idx_pair_2 == self.ambient_idx) ###
             dy_idx_pair_2[bool_dy] = temp[bool_dy] ###
 
             dz_temp = dz_idx_space_2_z+i+1
             dz_temp[dz_temp>=self.grid_shape[2]] = dz_idx_space_2_z[dz_temp>=self.grid_shape[2]]
-            temp = self._3D_space_idx_list[dz_idx_space_2_x, dz_idx_space_2_y, dz_temp] ###
+            temp = self._3D_space_idx_array[dz_idx_space_2_x, dz_idx_space_2_y, dz_temp] ###
             bool_dz = np.logical_or(dz_idx_pair_2 == self.neutral_idx, dz_idx_pair_2 == self.ambient_idx) ###
             dz_idx_pair_2[bool_dz] = temp[bool_dz] ###
 
