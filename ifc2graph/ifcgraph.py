@@ -20,11 +20,7 @@ class IfcGraph(nx.Graph):
         self.color_list = ["#808B96", "#e99d4e", "#a6cee3", "#b2df8a", "#fddbd0", "#91998e"] #Last is default
         super().__init__()
 
-    # Currently there is no general method to find the story level.
-    # This is based on the Name property of the IfcSpace entities and is only valid for the example office building.
-
     def generate_graph(self, save_dir=None):
-        adjacent_rooms_graph = nx.Graph() ###
         graph_node_attribute_dict = {}
 
         for space_name,adjacent_spaces_list in self.adjacent_spaces_dict.items():
@@ -72,7 +68,7 @@ class IfcGraph(nx.Graph):
             
 
             if node not in graph_node_attribute_dict:
-                graph_node_attribute_dict[node] = {"fontsize":fontsize, "width":width, "height": width, "color":self.color_list[story_idx]}
+                graph_node_attribute_dict[node] = {"fontsize":fontsize, "width":width, "height":width, "color":self.color_list[story_idx]}
             else:
                 graph_node_attribute_dict[node]["fontsize"] = fontsize
                 graph_node_attribute_dict[node]["width"] = width
@@ -80,9 +76,9 @@ class IfcGraph(nx.Graph):
                 graph_node_attribute_dict[node]["color"] = self.color_list[story_idx]
 
 
-        nx.set_node_attributes(self, values=graph_node_attribute_dict)
+        nx.set_node_attributes(self, graph_node_attribute_dict)
         nx.set_node_attributes(self, values="Helvetica", name="fontname")
-        nx.set_edge_attributes(self, values=8, name="penwidth")
+        nx.set_edge_attributes(self, values=5, name="penwidth")
         # nx.set_node_attributes(self, values=10, name="fontsize")
 
 
@@ -93,5 +89,5 @@ class IfcGraph(nx.Graph):
             file_name = os.path.join(save_dir, "adjacent_rooms_graph_" + self.graph_name)
 
         nx.drawing.nx_pydot.write_dot(self, file_name+".dot")
-        cmd_string = "\"C:/Program Files/Graphviz/bin/dot.exe\" -Tpng -Ksfdp -Nstyle=filled -Grankdir=LR -Goverlap=scale -Gsplines=true -Gmargin=0 -Gratio=fill -Gsize=7,5! -Gpack=true -Gdpi=1000 -Grepulsiveforce=1 -o " + file_name+".png " + file_name+".dot"
+        cmd_string = "\"C:/Program Files/Graphviz/bin/dot.exe\" -Tpng -Ksfdp -Nstyle=filled -Nfixedsize=true -Grankdir=LR -Goverlap=scale -Gsplines=true -Gmargin=0 -Gratio=fill -Gsize=7,5! -Gpack=true -Gdpi=1000 -Grepulsiveforce=10 -o " + file_name+".png " + file_name+".dot"
         os.system(cmd_string)
