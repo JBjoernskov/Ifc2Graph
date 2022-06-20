@@ -33,3 +33,6 @@ ifc_graph = ifcgraph.IfcGraph(adjacent_spaces_dict=adjacent_spaces_dict,
 # E.g.: 
 # graph_.generate_graph(save_dir="path/to/rep")
 ifc_graph.generate_graph() 
+
+
+h = 1+1
