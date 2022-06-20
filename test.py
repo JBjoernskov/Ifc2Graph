@@ -6,7 +6,7 @@ import ifc2graph.ifcgraph as ifcgraph
 path = str(Path(__file__).parent)
 project_name = "test"
 # ifc_file_name = "Office Building.ifc"
-# ifc_file_name = "Residential House.ifc"
+ifc_file_name = "Residential House.ifc"
 ifc_file_path = os.path.join(path, "test_ifc_files", ifc_file_name)
 
 # First the IfcGeometry object is instantiated.
