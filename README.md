@@ -7,6 +7,7 @@ Ifc2Graph currently has two functionalities, divided into the classes IfcGeometr
 
 - [IfcOpenShell](http://ifcopenshell.org/python)
 - [Trimesh](https://trimsh.org) 
+- [NumPy](https://numpy.org) 
 - [NetworkX](https://networkx.org)
 - [Graphviz](https://graphviz.org)
 
@@ -15,7 +16,7 @@ Ifc2Graph currently has two functionalities, divided into the classes IfcGeometr
 
 
 ### IfcGeometry
-The IfcGeometry class extracts the geometry for each IfcSpace entity in the provided IFC-file using [IfcOpenShell](http://ifcopenshell.org/python). This geometry is used to instantiate [Trimesh](https://trimsh.org) objects, which are then used to determine the adjacency of rooms. 
+The IfcGeometry class extracts the geometry for each IfcSpace entity in the provided IFC-file using [IfcOpenShell](http://ifcopenshell.org/python). This geometry is used to instantiate [Trimesh](https://trimsh.org) objects, which are then used in combination with [NumPy](https://numpy.org) to process the geometry and determine the adjacency of rooms. 
 
 #### Input:
 As input a path to a valid IFC-file must be provided. Example files are found in the "test_ifc_files" folder.
