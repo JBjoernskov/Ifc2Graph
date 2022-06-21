@@ -22,15 +22,13 @@ class IfcGeometry:
                 name = None, #Name of the SpaceGeometryContainer
                 force_init=False, #Force the creation of a new SpaceGeometryContainer object
                 exclude_space_list=[], #List with names of rooms that should not be included 
-                voxel_distance=0.5, #Distance between coordiantes along each axis X, Y, Z
-                tol=1e-4): #Tolerance used in the geometrical analysis. This should likely just be left at the default value
+                voxel_distance=0.5) #Distance between grid voxels along each axis X, Y, Z
 
         self.ifc_file_path = ifc_file_path
         self.name = name
         self.force_init = force_init
         self.exclude_space_list = exclude_space_list
         self.voxel_distance = voxel_distance
-        self.tol = tol
         self.x_size = None
         self.y_size = None
         self.z_size = None
