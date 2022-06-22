@@ -22,7 +22,7 @@ class IfcGeometry:
                 name = None, #Name of the SpaceGeometryContainer
                 force_init=False, #Force the creation of a new SpaceGeometryContainer object
                 exclude_space_list=[], #List with names of rooms that should not be included 
-                voxel_distance=0.5) #Distance between grid voxels along each axis X, Y, Z
+                voxel_distance=0.5): #Distance between grid voxels along each axis X, Y, Z
 
         self.ifc_file_path = ifc_file_path
         self.name = name
