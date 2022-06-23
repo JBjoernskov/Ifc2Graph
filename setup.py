@@ -19,6 +19,7 @@ setup(
         "python-ifcopenshell",
         "Trimesh",
         "rtree", # Used by Trimesh
+        "pyglet",
         "NumPy",
         "NetworkX",
     ],
