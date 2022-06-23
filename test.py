@@ -5,8 +5,8 @@ import ifc2graph.ifcgraph as ifcgraph
 
 path = str(Path(__file__).parent)
 project_name = "test"
-# ifc_file_name = "Office Building.ifc"
-ifc_file_name = "Residential House.ifc"
+ifc_file_name = "Office Building.ifc"
+# ifc_file_name = "Residential House.ifc"
 ifc_file_path = os.path.join(path, "test_ifc_files", ifc_file_name)
 
 # First the IfcGeometry object is instantiated.
@@ -14,7 +14,7 @@ ifc_geometry = ifcgeometry.IfcGeometry(ifc_file_path, project_name, force_init=T
 
 # The extracted geometry can be visualized using the below function (this will open a new window).
 # Simply close the opened window to execute the rest of this file.
-# ifc_geometry.visualize()
+ifc_geometry.visualize()
 
 # Using the IfcGeometry object, a dictionary can be created. 
 # Here, the keys corresponds to the Name attribute of the IfcSpace entities contained in the IFC input file. 
