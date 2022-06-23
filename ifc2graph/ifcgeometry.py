@@ -4,7 +4,7 @@ import ifcopenshell.geom
 import trimesh
 
 #custom
-import utils.progressbar as progressbar
+import ifc2graph.utils.progressbar as progressbar
 
 #standard
 import math
