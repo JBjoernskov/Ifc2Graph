@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="ifc2graph",
-    python_requires='<=3.7',
+    python_requires='<3.8',
     version="0.0.0",
     description="A tool designed to extract room topology from files following the Industry Foundation Classes (IFC) standard.",
     url="https://github.com/JBjoernskov/Ifc2Graph",
