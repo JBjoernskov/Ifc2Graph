@@ -5,12 +5,14 @@ Ifc2Graph currently has two functionalities, divided into the classes IfcGeometr
 
 ## Installation
 
+The package has been tested for Python 3.7.12, but should also work for other 3.7.X versions. 
+
 The package can be install with pip and git as follows.
 ```bat
 python -m pip install git+https://github.com/JBjoernskov/Ifc2Graph
 ```
 
-
+To utilize the ifcgraph module, Graphviz must be installed seperately. 
 - [Graphviz](https://graphviz.org)
 
 
