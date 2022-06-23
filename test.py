@@ -28,8 +28,8 @@ ifc_graph = ifcgraph.IfcGraph(adjacent_spaces_dict=adjacent_spaces_dict,
                                 graph_name=project_name)
 
 
-# This function saves as a default an image of the generated graph in the .../Ifc2Graph directory.
-# Optionally, a path can be given as argument. 
+# This function saves by default an image of the generated graph in the current working directory.
+# Optionally, a save-path can be given as argument. 
 # E.g.: 
-# ifc_graph.generate(save_dir="path/to/rep")
+# ifc_graph.generate(save_dir="path/to/save")
 ifc_graph.generate()
