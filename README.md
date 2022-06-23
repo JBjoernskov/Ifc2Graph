@@ -1,6 +1,6 @@
 # Ifc2Graph
 
-The Ifc2Graph module can be used as a tool to extract space topology from IFC-files. 
+The Ifc2Graph package can be used as a tool to extract space topology from IFC-files. 
 Ifc2Graph currently has two functionalities, divided into the classes IfcGeometry and IfcGraph.
 
 ## Installation
@@ -56,7 +56,7 @@ Below, examples of generated graph images is seen for an actual building.
 
 
 ## Example
-The test.py file shows the basic use of the module.
+The test.py file shows the basic use of the package.
 
 
 
