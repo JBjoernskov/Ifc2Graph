@@ -18,6 +18,7 @@ setup(
     install_requires=[
         "python-ifcopenshell",
         "Trimesh",
+        "rtree", # Used by Trimesh
         "NumPy",
         "NetworkX",
     ],
