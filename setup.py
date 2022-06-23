@@ -19,9 +19,11 @@ setup(
         "python-ifcopenshell",
         "Trimesh",
         "rtree", # Used by Trimesh
-        "pyglet",
+        "scipy" # Used by Trimesh
+        # "pyglet", # Used by Trimesh
         "NumPy",
         "NetworkX",
+        "pydot" # Used by NetworkX
     ],
     classifiers=["Programming Language :: Python :: 3"],
 )
