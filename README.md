@@ -12,7 +12,7 @@ The package can be install with pip and git as follows.
 python -m pip install git+https://github.com/JBjoernskov/Ifc2Graph
 ```
 
-To utilize the ifcgraph module, Graphviz must be installed seperately. 
+To utilize the ifcgraph module, Graphviz must be installed separately. 
 - [Graphviz](https://graphviz.org)
 
 
