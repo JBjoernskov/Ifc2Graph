@@ -16,7 +16,7 @@ setup(
     ],
     include_package_data=True,
     install_requires=[
-        "IfcOpenShell",
+        "python-ifcopenshell",
         "Trimesh",
         "NumPy",
         "NetworkX",
