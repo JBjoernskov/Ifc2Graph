@@ -95,3 +95,6 @@ class IfcGraph(nx.Graph):
         app_path = shutil.which("dot")
         cmd_string = "\"" + app_path + "\" -Tpng -Ksfdp -Nstyle=filled -Nfixedsize=true -Grankdir=LR -Goverlap=scale -Gsplines=true -Gmargin=0 -Gratio=fill -Gsize=7,5! -Gpack=true -Gdpi=1000 -Grepulsiveforce=10 -o " + file_name+".png " + file_name+".dot"
         os.system(cmd_string)
+
+        cwd = os.getcwd()
+        print("Generated graph can be found in directory: \"" + cwd + "\"")

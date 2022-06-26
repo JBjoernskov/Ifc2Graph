@@ -6,7 +6,7 @@ setup(
     version="0.0.0",
     description="A tool designed to extract room topology from files following the Industry Foundation Classes (IFC) standard.",
     url="https://github.com/JBjoernskov/Ifc2Graph",
-    keywords="ifc graph optimization model identification estimation",
+    keywords="ifc, graph, room topology",
     author="Jakob Bjørnskov, Center for Energy Informatics SDU",
     author_email="jakob.bjornskov@me.com, jabj@mmmi.sdu.dk",
     license="BSD",
