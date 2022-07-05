@@ -13,7 +13,7 @@ python -m pip install git+https://github.com/JBjoernskov/Ifc2Graph
 ```
 
 To utilize the ifcgraph module, Graphviz must be installed separately:
-- [Graphviz](https://graphviz.org/download)
+- [Graphviz](https://graphviz.org/download) (Remember to add the directory to system path)
 
 
 ## Usage 

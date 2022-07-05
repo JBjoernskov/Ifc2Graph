@@ -1,6 +1,7 @@
 import networkx as nx
 import os
 import shutil
+import subprocess
 
 
 class IfcGraph(nx.Graph):
@@ -89,12 +90,29 @@ class IfcGraph(nx.Graph):
         else:
             file_name = os.path.join(save_dir, "adjacent_rooms_graph_" + self.graph_name)
 
+
         nx.drawing.nx_pydot.write_dot(self, file_name+".dot")
 
         # If Python can't find the dot executeable, change "app_path" variable to the full path
         app_path = shutil.which("dot")
-        cmd_string = "\"" + app_path + "\" -Tpng -Ksfdp -Nstyle=filled -Nfixedsize=true -Grankdir=LR -Goverlap=scale -Gsplines=true -Gmargin=0 -Gratio=fill -Gsize=7,5! -Gpack=true -Gdpi=1000 -Grepulsiveforce=10 -o " + file_name+".png " + file_name+".dot"
-        os.system(cmd_string)
+        args = [app_path,
+                "-Tpng",
+                "-Ksfdp",
+                "-Nstyle=filled",
+                "-Nfixedsize=true",
+                "-Grankdir=LR",
+                "-Goverlap=scale",
+                "-Gsplines=true",
+                "-Gmargin=0",
+                "-Gratio=fill",
+                "-Gsize=7,5!",
+                "-Gpack=true",
+                "-Gdpi=1000",
+                "-Grepulsiveforce=10",
+                "-o" + file_name + ".png",
+                file_name + ".dot"]
+
+        subprocess.run(args=args)
 
         cwd = os.getcwd()
         print("Generated graph can be found in directory: \"" + cwd + "\"")
