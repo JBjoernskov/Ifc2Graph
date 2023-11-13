@@ -60,7 +60,21 @@ The test.py file shows the basic use of the package.
 
 
 
-
+## Cite as
+```yaml
+@inproceedings{Ifc2Grap},
+title = {A Modular Thermal Space Coupling Approach for Indoor Temperature Forecasting Using Artificial Neural Networks",
+abstract = {With the increasing digitalization of buildings andthe adoption of comprehensive sensing and meter-ing networks, the concept of building digital twinsis emerging as a key component in future smart andenergy-efficient buildings. Such digital twins enablethe use of flexible and adaptable data-driven modelsto provide services such as automated performancemonitoring and model-based operational planning inbuildings. In this context, accurate indoor temper-ature models are vital to ensure that the proposedoperational strategies are effective, feasible, and donot compromise indoor comfort. In this work, thesignificance of thermal space coupling for data-drivenindoor temperature forecasting is investigated by as-sessing and comparing the performance of an isolatedand coupled Long Short-Term Memory model archi-tecture across 70 spaces in a case study building. Toconstruct the coupled architecture, an open-sourcetool is developed and presented, which allows the au-tomated extraction of space topology from IFC-filesto identify adjacent spaces. The coupled architec-ture is found to outperform the isolated architecturefor ∼84% of the investigated spaces, with significantimprovements under certain operational and climaticconditions. To account for the subset of spaces wherethe isolated architecture performs better, it is pro-posed to select between the two architectures accord-ingly. The demonstrated modularity and embeddedadaptability of the proposed model architectures pro-vide a sound basis for implementation in a highly dy-namic building Digital Twin environment.},
+author = {Jakob Bj{\o}rnskov and Muhyiddine Jradi},
+year = {2022},
+month = {dec},
+language = {English},
+volume = {6},
+booktitle = {Proceedings of BSO Conference 2022: 6th Conference of IBPSA-England},
+publisher = {International Building Performance Simulation Association},
+note = {Building Simulation and Optimisation 2022 ; Conference date: 13-12-2022 Through 14-12-2022},
+}
+```
 
 
 

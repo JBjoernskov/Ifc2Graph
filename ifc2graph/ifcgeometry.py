@@ -107,7 +107,6 @@ class IfcGeometry:
                 if len(set(self.space_name_list)) != len(self.space_name_list):
                     print("Warning: duplicate space names found in IFC.")
 
-
     def init_3D_space_idx_array(self):
         min_x_list = []
         min_y_list = []

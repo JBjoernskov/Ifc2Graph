@@ -10,7 +10,7 @@ ifc_file_name = "Office Building.ifc"
 ifc_file_path = os.path.join(path, "test_ifc_files", ifc_file_name)
 
 # First the IfcGeometry object is instantiated.
-ifc_geometry = ifcgeometry.IfcGeometry(ifc_file_path, project_name, force_init=True)
+ifc_geometry = ifcgeometry.IfcGeometry(ifc_file_path, project_name, force_init=False)
 
 # The extracted geometry can be visualized using the below function (this will open a new window).
 # Simply close the opened window to execute the rest of this file.

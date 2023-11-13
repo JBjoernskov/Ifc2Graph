@@ -21,7 +21,7 @@ setup(
         "Trimesh",
         "rtree", # Used by Trimesh
         "scipy", # Used by Trimesh
-        # "pyglet", # Used by Trimesh
+        "pyglet", # Used by Trimesh
         "NumPy",
         "NetworkX",
         "pydot" # Used by NetworkX
