@@ -17,7 +17,7 @@ setup(
     ],
     include_package_data=True,
     install_requires=[
-        "ifcopenshell",
+        "ifcopenshell-python",
         "Trimesh",
         "rtree", # Used by Trimesh
         "scipy", # Used by Trimesh
